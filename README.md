@@ -17,3 +17,5 @@ Preview:\
 * Follow the note in green and strum the note on the ukulele
 * If the note is correct, the score is incremented and the next note is displayed
 * If the note is incorrect, keep trying until time-out after which the next note is displayed 
+
+You can refer to this [source](https://newt.phys.unsw.edu.au/jw/notes.html) for more information about notes, MIDI numbers and frequencies. 
