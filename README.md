@@ -10,11 +10,10 @@ python run_ukulele_practice.py --instrument ukulele --speed 50 --tuning 0 --trie
 * ```tuning```: +/- half-steps (default: ```0```)
 * ```tries```: set the number of notes that are generated for practice
 
-Preview:
+Preview:\
 ![Image description](misc/screenshot.png)
 
-
-##Instructions
+## Instructions
 * Follow the note in green and strum the note on the ukulele
 * If the note is correct, the score is incremented and the next note is displayed
 * If the note is incorrect, keep trying until time-out after which the next note is displayed 
