@@ -1,0 +1,8 @@
+numpy
+os-sys
+setuptools
+regex
+argparse
+scipy
+pyaudio
+termcolor
