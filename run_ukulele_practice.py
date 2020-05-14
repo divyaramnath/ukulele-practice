@@ -16,6 +16,7 @@ def parse_arguments():
     parser.add_argument("--tries", help="Number of tries", type=int, default=100)
     parser.add_argument("--instrument", help="Type of instrument (options: ukulele)", type=str, default="ukulele")
     parser.add_argument("--speed", help="Set a speed for displaying the notes", type=int, default=20)
+    parser.add_argument("--tuning", help="Number of +/- half-steps", type=int, default=0)
     args = parser.parse_args()
     return args
 
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     midi_number_to_note = get_midi_number_to_note_table()
     note_to_midi_number = get_note_to_midi_number_table()
 
-    ukulele = MusicalInstrument('ukulele', 0)
+    ukulele = MusicalInstrument('ukulele', args.tuning)
     sheet_music = SheetMusic(ukulele)
 
     audio = pyaudio.PyAudio()
@@ -93,18 +94,20 @@ if __name__ == "__main__":
             if num_frames >= FRAMES_PER_FFT:
                 note = midi_number_to_note[n0]
 
-                score_text = colored("Current score: {}/{}    ".format(score, k), "magenta")
+                score_text = colored(" Current score: {}/{}    ".format(score, k), "magenta")
                 if note == sheet_music.expected_note:
                     text = colored("Correctly detected note: {}".format(note), 'green')
-                    print("{}    {}".format(text, score_text), end='\r')
+                    print(" {}    {}".format(text, score_text), end='\r')
                     score += 1
                     time.sleep(1)
                     break
                 else:
-                    text = colored("Detected note: {}            ".format(note), 'red')
-                    print("{}    {}".format(text, score_text), end='\r')
+                    text = colored(" Detected note: {}            ".format(note), 'red')
+                    print(" {}    {}".format(text, score_text), end='\r')
 
             speed -= 1
 
-    result_text = colored("Your score is: {:.2f}%".format(score/number_of_tries), "magenta", attrs=["bold"])
-    print(result_text)
+    score_percentage = 100 * score/number_of_tries
+    result_text = colored("Your score is: {}/{}    {:.2f}%".format(score, number_of_tries, score_percentage),
+                          "magenta", attrs=["bold"])
+    print(" {}                              ".format(result_text))
