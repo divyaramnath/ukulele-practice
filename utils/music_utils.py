@@ -42,3 +42,9 @@ def get_note_to_midi_number_table():
         note_to_midi_number[i] = '{}{}'.format(notes_progression[note], octave)
 
     return note_to_midi_number
+
+
+# Get min/max index within FFT of notes we care about.
+# See docs for np.rfftfreq()
+def note_to_fftbin(n, frequency_step):
+    return convert_midi_number_to_frequency(n)/frequency_step
